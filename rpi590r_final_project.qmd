@@ -2,9 +2,19 @@
 title: "epi590r_final_project"
 author: "Kiran Lakhani"
 format: html
+execute:
+  warning: false
+error: false
 ---
 
 ```{r load-and-clean-data, echo=FALSE}
+
+library(tidyverse)
+library(gtsummary)
+library(here)
+library(readr)
+library(dplyr)
+library(broom)
 
 # Load data using here::here
 data <- read_csv(here("data", "raw", "strep_tb.csv"))
@@ -31,8 +41,8 @@ When you click the **Render** button a document will be generated that includes 
 ```{r}
 #Create a {gtsummary} table of descriptive statistics about your data (1 pt)
 
-#| label: sum_stats
-#| fig-cap: "This is a summary table."
+#| label: tbl-sum_stats
+#| tbl-cap: "This is a summary table."
 
 tbl_summary(
 	modified_data,
@@ -55,8 +65,8 @@ tbl_summary(
 
 ```{r}
 #Fit a regression (1 pt)
-#| label: tbl_reg
-#| fig-cap: "These are regression results for whether patients improved or not. Improvement is categorized as binomial therefore the glm method was used in the regression model."
+#| label: tbl-reg
+#| tbl-cap: "These are regression results for whether patients improved or not. Improvement is categorized as binomial therefore the glm method was used in the regression model."
 tbl_uvregression(
 	modified_data,
 	y = improved,
@@ -79,7 +89,7 @@ In the figure created  below patients were categorized as "Sensitive" = 1, "Mode
 
 ```{r}
 #Create a figure (1 pt)
-#| label: hist_fig
+#| label: fig-hist
 #| fig-cap: "Histogram demonstrates Streptomycin resistance in patients"
 hist(as.numeric(modified_data$strep_resistance),
 		 main = "Histogram of Streptomycin Resistance",
@@ -95,26 +105,24 @@ total_sample <- nrow(modified_data)
 There were `r total_sample` participants. 
 
 ```{r}
-#nline R code printing something else (like we did with the mean age in the example) (1 pt) 
+#Inline R code printing something else (like we did with the mean age in the example) (1 pt) and cross reference (1 pt)
 
 stats <- list(n = nrow(modified_data),
               mean_rad_num = mean(modified_data$rad_num))
 ```
+
 There were `r stats$n` participants with a mean chest x-ray rating of `r stats$mean_rad_num`.
 
-
-```{r}
-#Cross-references to a table and a figure at least once each (1 pt)
-
-@fig-hist contains a histogram and @sum_stats contains a table of descriptive statistics
-
-```
-
+@fig-hist shows the distribution of streptomycin resistance and @tbl-sum_stats presents the overall descriptive statistics.
 
 ```{r}
 #A brief description of the data, including its source (1 pt)
 ```
 
 This data is a collection of patients with TB. The data summarizes their treatment history, gender, baseline characteristics such as cavitation and condition and a scale of resistance to the treatment drug streptomycin at six months. 
+
+Source: data/strep_tb.rda
+
+https://github.com/higgi13425/medicaldata/blob/a73901fefd7cf05b832c9a73663c066a5ac22f96/data/strep_tb.rda 
 
 ```
