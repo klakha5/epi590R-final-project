@@ -113,7 +113,7 @@ stats <- list(n = nrow(modified_data),
 
 There were `r stats$n` participants with a mean chest x-ray rating of `r stats$mean_rad_num`.
 
-@fig-hist shows the distribution of streptomycin resistance and @tbl-sum_stats presents the overall descriptive statistics.
+`@fig-hist` shows the distribution of streptomycin resistance and `@tbl-sum_stats` presents the overall descriptive statistics.
 
 ```{r}
 #A brief description of the data, including its source (1 pt)
